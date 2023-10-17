@@ -1,13 +1,39 @@
-// initialState = {
-//     contacts: [
-//         { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-//         { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-//         { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-//         { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
-//     ],
-//     filter: ''
-// };
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+axios.defaults.baseURL = "https://6524278cea560a22a4e98357.mockapi.io";
 
-// export const createContactsReducer = (state = initialState, action) => {
-//     return state;
-// }
+export const fetchContacts = createAsyncThunk(
+    "contacts/fetchAll",
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.get("/contacts");
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+export const addContact = createAsyncThunk(
+    "contacts/addContact",
+    async (data, thunkAPI) => {
+        try {
+            const response = await axios.post("/contacts", data);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+export const deleteContact = createAsyncThunk(
+    "contacts/deleteContact",
+    async (itemId, thunkAPI) => {
+        try {
+            const response = await axios.delete(`/contacts/${itemId}`);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+

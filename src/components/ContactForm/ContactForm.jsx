@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 export default function ContactForm (props) {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   
  
   const handleChangeForm = event => {
@@ -16,8 +16,8 @@ export default function ContactForm (props) {
     case 'name':
       setName(value);
       break;
-    case 'number':
-      setNumber(value);
+    case 'phone':
+      setPhone(value);
       break;
     default:
       return;
@@ -31,19 +31,19 @@ export default function ContactForm (props) {
    const isValidatedForm = validateForm();
 
   if (isValidatedForm) {
-    onAdd({ id, name, number });
+    onAdd({ id, name, phone });
     resetForm();
   }
 };
 
   const resetForm = () => {
     setName('');
-    setNumber('');
+    setPhone('');
 } 
 
 const validateForm = () => {
   const { onCheckUnique } = props;
-  if (!name || !number) {
+  if (!name || !phone) {
     alert('Some field is empty');
     return false;
   }
@@ -67,8 +67,8 @@ const validateForm = () => {
       <Label htmlFor=""> Number
         <Input
           type="tel"
-          name='number'
-          value={number}
+          name='phone'
+          value={phone}
           placeholder="Enter contact number"
           onChange={handleChangeForm}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
