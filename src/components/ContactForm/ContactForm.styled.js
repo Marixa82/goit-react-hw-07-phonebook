@@ -47,4 +47,6 @@ width:250px;
 height:20px;
 background-color: #d3eaed;
 border-radius: 5px;
-outline:none;`
+outline:none;
+border: 1px solid #0E197D ;
+`
