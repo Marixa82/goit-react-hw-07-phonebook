@@ -3,22 +3,32 @@ import styled from '@emotion/styled';
 export const Li = styled.li`
 max-width:400px;
 display:flex;
-justify-content: center;
+justify-content: space-between;
 margin-bottom: 20px;
 align-items: center;
   gap: 10px;`
 
 export const Button = styled.button`
-  width:70px;
- padding: 10px;
-   background-color: #a8edea;
-  font-size: 10px;
-  border-radius: 5px;
+ background: linear-gradient(
+    to right, 
+     #e9d362 0%,
+    #333333 51%, 
+    #e9d362 100%);
+  margin: 10px;
+  padding: 5px 10px;
+  text-align: center;
   border: none;
-   font-weight: bold;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #F5FFFA;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+   border-radius: 5px;
+  display: block;
+
   &:hover {
-    background-color:#051efc;
-    color: white;
+    background-position: right center;
+    text-decoration: none;
+  
   }`
 
 export const Span = styled.span`
