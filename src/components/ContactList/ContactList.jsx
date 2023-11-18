@@ -24,10 +24,3 @@ export const ContactList = ({ items, delContact }) => {
     items: PropTypes.array.isRequired,
     delContact: PropTypes.func.isRequired,
  }
-/*  {items.length === 0 ? (
-      <p>No contacts to display.</p>
-    ) : (
-      items.map(({ id, name, number }) => (
-          <ContactListItem key={id} name={name} number={number} delContact={delContact} />
-      ))
-    )} */
