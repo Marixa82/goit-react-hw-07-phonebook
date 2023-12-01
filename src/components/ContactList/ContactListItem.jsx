@@ -1,17 +1,13 @@
 import { Li, Span,Button } from './ContactListItem.styled';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/createContacts';
 
-export const ContactListItem = ({ id, name, phone, delContact }) => {
+export const ContactListItem = ({ id, name, phone}) => {
+    const dispatch = useDispatch()
         return (
         <Li>
            <Span>{name}</Span> : <Span>{phone}</Span>
-            <Button type="button" onClick={()=> delContact(id)}>Delete</Button>
+            <Button type="button" onClick={()=> dispatch(deleteContact(id))}>Delete</Button>
         </Li>
     )
-}
-ContactListItem.propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-  
 }

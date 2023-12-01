@@ -1,17 +1,24 @@
 import { Button, Input, Label, Form} from "./ContactForm.styled";
 import {  useState } from "react";
 import { nanoid } from 'nanoid'
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from "react-redux";
+import { selectContacts } from "redux/selectors";
+import { addContact } from "redux/createContacts";
 
 
-
-export default function ContactForm (props) {
+export default function ContactForm () {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
   
- 
+ const handelCheckUniqueContact = (name) => {
+   const isNameContact = !!contacts.find((item) => item.name.toLowerCase() === name.toLowerCase());
+    isNameContact && alert(`${name} is already in items`)
+    return !isNameContact
+  }
   const handleChangeForm = event => {
-        const {name, value} = event.target
+  const {name, value} = event.target
   switch (name) {
     case 'name':
       setName(value);
@@ -27,13 +34,15 @@ export default function ContactForm (props) {
   
   const handelSubmit = (e) => {
   e.preventDefault();
-  const { onAdd } = props;
-   const isValidatedForm = validateForm();
+    const isValidatedForm = validateForm();
 
   if (isValidatedForm) {
-    onAdd({ id, name, phone });
+    dispatch(addContact({ id, name, phone }));
     resetForm();
-  }
+    }
+  else {
+    resetForm();
+    }
 };
 
   const resetForm = () => {
@@ -42,12 +51,11 @@ export default function ContactForm (props) {
 } 
 
 const validateForm = () => {
-  const { onCheckUnique } = props;
-  if (!name || !phone) {
+    if (!name || !phone) {
     alert('Some field is empty');
     return false;
   }
-  return onCheckUnique(name);
+  return handelCheckUniqueContact(name);
 };
 
   return (
@@ -81,10 +89,7 @@ const validateForm = () => {
 
 }
 
-ContactForm.propTypes = {
-  onAdd: PropTypes.func.isRequired,
-  onCheckUnique: PropTypes.func.isRequired,
-};
+
 
 
 
